@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css?family=Dancing+Script');
 
 .imgPortada{
-    width: 370px;
+    width: 150px;
 }
 
 .piezas{
@@ -38,8 +38,7 @@
     margin: 0px auto;
 }
 
-
-#fondo{
+body{
     background-image: url(../img/granja.jpg);
     background-position: center center;
     background-repeat: no-repeat;
@@ -47,7 +46,6 @@
     background-size: cover;
     background-color: beige ;
 }
-
 
 #botonRmp{
     align-content: center;
@@ -83,17 +81,16 @@
     color: bisque;
 }
 
-
 #lista{
-    padding: 100px 0 100px 0;
+    padding: 150px 0 100px 0;
     text-align: center;
-    background-color: bisque;
+    background-color: aliceblue;
 }
 
 #nombre{
     text-align: center;
-    margin-top: 90px;
-    margin-bottom: -70px;
+    margin-top: 150px;
+    margin-bottom: -90px;
 }
 
 #logo{
@@ -108,12 +105,8 @@
     border: 2px black;
 }
 
-.row{
-    width: 1800px; 
-    height: 1800px;
-}
-
-.tituloInicio{color:red; 
+.tituloInicio{
+   color:red; 
    text-align: center;
    font-size:50px;
    font-family:fantasy;
