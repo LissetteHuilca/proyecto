@@ -1,171 +1,186 @@
 class Usuario{
     constructor(objUser){
-        this.nombre = objUser.nombre;
-        this.usuario = objUser.usuario;
-        this.pass = objUser.pass;
-        this.puntos = objUser.puntos;
+        this.nombre=objUser.nombre;//parte derecha Json
+        this.usuario=objUser.usuario;
+        this.pass=objUser.pass;
+        this.score=objUser.score;
         
-        var rompecabezas = [];
-          $.each(objUser.rompecabezas, function(i, rmp){
-            rompecabezas.push(new Rompecabeza(rmp));   
+        var rompecabezas=[];
+         $.each(objUser.rompecabezas, function(i, rmp){//rompecabeza(respuesta)
+           rompecabezas.push(new Rompecabeza(rmp));
         });
-        this.rompecabezas = rompecabezas;
+        
+        
+        this.rompecabezas= rompecabezas;
     }
 }
-
 class Rompecabeza{
     constructor(objRmp){
-        this.titulo = objRmp.titulo;
-        this.portada = objRmp.portada;
-        this.sonido = objRmp.sonido;
+        this.titulo=objRmp.titulo;
+        this.portada=objRmp.portada;
+        this.sonido=objRmp.sonido;
         
-         var piezas = [];
-          $.each(objRmp.piezas, function(i, pieza){
-            piezas.push(new Pieza(pieza));   
+        var piezas=[];
+         $.each(objRmp.piezas, function(i, pieza){//pieza(respuesta)
+           piezas.push(new Pieza(pieza));
         });
-        this.piezas = piezas;
+        
+        this.piezas=piezas;
+        
     }
 }
 
 class Pieza{
     constructor(objPieza){
-        this.imagen = objPieza.imagen;
-        this.orden = objPieza.orden;
+        this.imagen=objPieza.imagen;
+        this.orden=objPieza.orden;
     }
+}
+
+function leer(){
+    
+    
 }
 
 function listarRompecabezas(){
     var usuarios=[];
     $.getJSON('info.json', function(data){
-       
-        $.each(data, function(i, usr){
-            usuarios.push(new Usuario(usr));   
+     
+        $.each(data, function(i, user){//user(respuesta)
+           usuarios.push(new Usuario(user));
         });
         
-          console.log(usuarios);
+            $.each(usuarios[0].rompecabezas, function(i, objRmp){//rompecabeza(respuesta)
+
+        $("#lista").append("<div class='col-md-4'>\<button id='btnlista' onclick='enviar("+i+")'>\ <h3 id='idh3'>" + objRmp.titulo+"</h3> \ <img class='imgPortada' src='" +objRmp.portada+"' alt=''>\</button>\ </div)");//append para muestre uno debajo del otro
+    });
         
-     $.each(usuarios[0].rompecabezas, function(i, objRmp){
-            $("#lista").append("<div class='col-md-4'>\
-                        <button id='btnLista' onclick='enviar("+i+")'>\
-                        <h3 id='idh3'>"+ objRmp.titulo + "</h3>\
-                        <img class='imgPortada img-fluid' src='" + objRmp.portada + "'alt=''>\
-                        </button>\
-                        </div>"); 
-        });
         
+        //DESCARAR JSON 
         let dataStr = JSON.stringify(usuarios);
         let dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
 
-        let exportFileDefaultName = 'datos.json';
-        
-        $("#exportar").attr('href', dataUri);
-        $("#exportar").attr('download', exportFileDefaultName);    
-        
-    });  
+        let exportFileDefaultName = 'info.json';
+        $("#exportar").attr('href',dataUri);
+        $("#exportar").attr('download',exportFileDefaultName);
+     
+        });
     
+ 
 }
 
-function enviar(pos) {
-    localStorage.setItem("posRmp", pos);
+
+ function enviar(pos) {
+    localStorage.setItem("posRmp", pos);//guardar en cache
     window.location = "rompecabeza.html";
 };
 
-var intentos=0;
-var piezaCrr = 0;
 
-function recibir(){
-    
-     $("#audioFondo").html("<audio loop id='audioF' controls><source type='audio/wav' src='../rompecabeza/pig-oink.mp3'></audio>");
-     $("#audioF")[0].play();
-    
-    var recoger = localStorage.getItem("posRmp");
+var intentos=0;
+var piezaCorrecta=0;
+ function recibir() {
+     
+     //AUDIO DE FONDO
+     $("#audioFondo").html("<audio loop id='audioF' controls><source type='audio/wav' src='..\/rompecabeza\/lagranja.mp3'></audio>");
+    $("#audioF")[0].play();
+     
+     
+    var recoger = localStorage.getItem("posRmp");//guardar 
     //alert(recoger);
-    var usuarios=[];
-     $.getJSON('info.json', function(data){
-       
-        $.each(data, function(i, usr){
-            usuarios.push(new Usuario(usr));   
+     
+     
+      var usuarios=[];
+    $.getJSON('info.json', function(data){
+     
+        $.each(data, function(i, user){//user(respuesta)
+           usuarios.push(new Usuario(user));
         });
+        //obteniendo los datos de cada rompecabezas
+            $.each(usuarios[0].rompecabezas, function(i, objRmp){//rompecabeza(respuesta)
+
+        if(i==recoger){
+            
+            $("#titulo").html(objRmp.titulo);
+             $("#puntaje").html(usuarios[0].score);
+             $("#intentos").html(intentos);
+            
+            var lista= objRmp.piezas;
+            lista= objRmp.piezas.sort(function() {return Math.random() - 0.5})
+            
+         $.each(lista, function(i, objPieza){//user(respuesta)
+           $(".piezas").append("<div class='col-md-4'>"+objPieza.orden+"<img id='s"+objPieza.orden+"' src='"+objPieza.imagen+"'></div>");
+             
+            $("#s"+objPieza.orden).draggable({ revert: true});//si no es compatible con la posisicon se regresa // llama al mismo id
+             
+             
+             
+             $(".fondoRmp").append("<div id='fs"+(i+1)+"' class='col-md-4 fondoPz'>"+(i+1)+"</div>");
+             
+             
+             //que reciban el tablero
+             $("#fs"+(i+1)).droppable({
+        drop: function (event, ui) {
+            intentos++;
         
-          console.log(usuarios);
-        
-     $.each(usuarios[0].rompecabezas, function(i, objRmp){
-            if(i==recoger){
-                //alert(objRmp.titulo);
-                $("#titulo").html(objRmp.titulo);
-                $("#puntaje").html(usuarios[0].puntos);
-                $("#intentos").html(intentos);
+             $("#intentos").html(intentos);
+            //alert(intentos);
+            if ("f"+ui.draggable.attr("id") == $(this).attr("id")) {
                 
-                var lista = objRmp.piezas;
-                lista = objRmp.piezas.sort(function() {return Math.random() - 0.5})
+                piezaCorrecta++;
                 
-                $.each(objRmp.piezas, function(i, objPieza){
-                     $(".piezas").append("<div class='col-md-4'>"+objPieza.orden+"<img id='s"+objPieza.orden+"' class='imgPieza' src='"+objPieza.imagen+"'></div>"); 
+                if(piezaCorrecta == objRmp.piezas.length){
+                   
+                   alert("GANASTE!");
                     
-                    $("#s"+objPieza.orden).draggable({
-                        revert: true
-                    });                   
                     
-                    $(".fondoRmp").append("<div id='fs"+(i+1)+"' class='col-md-4 fondoPz'>"+(i+1)+"</div>");
                     
-                    $("#fs"+(i+1)).droppable({
-                       drop: function (event, ui) {
-                         intentos++;
+                    if(intentos<=15){
                         
-                         $("#intentos").html(intentos);
-                           
-                           
-                       if ("f"+ui.draggable.attr("id") == $(this).attr("id")) {
-                           piezaCrr++;
-                           if(piezaCrr==objRmp.piezas.length){
-                              alert("GANASTE!!");
-                               
-                               
-                               
-                               $("#audio").find("source").attr("src", objRmp.sonido);
-                               $("#audio").play();
-                               
-                              if(intentos<=15){
-                                   alert("PUNTOS!!");
-                                 usuarios[0].puntos++;
-                                 $("#puntaje").html(usuarios[0].puntos);
-                                  alert(usuarios[0].puntos);
-                              }
-                            }
-                                var url = ui.draggable.attr("src");
-                        $(this).html("<img class='imgPieza' src='" + url + "'>");
-                           ui.draggable.remove();
-                           $("#audioDiv").html("<audio id='audioA' controls><source type='audio/wav' src='"+objRmp.sonido+"'></audio>");
-                                    $("#audioA")[0].play();
-                   }
-                           
-               }
-            });
+                        alert("PUNTOS!!");
+                        
+                       
+                       usuarios[0].score++;
+                        
+                        
+                         $("#puntaje").html(usuarios[0].score);
+                       }
+                     
                     
-          });
+                    
+            }
+                   // alert("f");
+                var url = ui.draggable.attr("src");
+                $(this).html("<img objPieza.orden src='" + url + "'>");
+                 ui.draggable.remove();
+
+                
+                $("#audioDiv").html("<audio id='audioA' controls><source type='audio/wav' src='"+objRmp.sonido+"'></audio>");
+                                    $("#audioA")[0].play();
+            } 
+
+
         }
-        
-     }); 
-   });   
+    });
+             
+             
+        });
+            
+            
+            
+            
+            
+        }
+                
+                
+                
+    });
+ });
+    
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+    
 
 
 
