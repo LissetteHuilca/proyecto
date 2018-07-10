@@ -108,3 +108,13 @@
     border: 2px black;
 }
 
+.row{
+    width: 1800px; 
+    height: 1800px;
+}
+
+.tituloInicio{color:red; 
+   text-align: center;
+   font-size:50px;
+   font-family:fantasy;
+}
