@@ -1,14 +1,110 @@
-.imgPortada{width: 370px}
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script');
 
-.row{width: 1800px; height: 1800px;}
-#lista{width: 1200px; height: 300px;}
-.piezas{background-color: chartreuse;width: 605px; height: 600px;}
-.fondoRmp{background-color: aquamarine; width: 605px; height: 600px;}
-.imgPieza{width: 200px; height: 200px;}
+.imgPortada{
+    width: 370px;
+}
 
-#audioDiv,#audioFondo{display: none;}
-.tituloInicio{color:red; 
-   text-align: center;
-   font-size:50px;
-   font-family:fantasy;
-   }
+.piezas{
+    background-image: url(../img/madera.jpg);
+    padding: 20px;
+    width: 605px;
+    height: 600px;
+}
+
+.fondoRmp{
+    background-color: #a2c453;
+    padding: 20px;
+    margin-right: 20px;
+    width: 250px;
+    
+}
+
+.imgPieza{
+    width: 100px;
+    height: 100px;
+}
+
+.fondoPz{
+    padding: 15px;
+    width: 150px;
+    height: 150px;
+    border: 1px solid;
+}
+
+#nombreRmp{
+    width: 450px;
+    margin: 0px auto;
+}
+
+
+#fondo{
+    background-image: url(../img/granja.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: beige ;
+}
+
+
+#botonRmp{
+    align-content: center;
+    margin-bottom: -10px;
+}
+
+#divRmp{
+    margin-top: -30px;
+}
+
+#boton{
+    text-align: center;
+    height: 300px;
+    font-family: 'Dancing', cursive;
+    font-size: larger;
+}
+
+#imgBoton{
+    width: 100px;
+}
+
+#btnLista{
+    background-image: url(../img/madera.jpg);
+    background-position: center center;
+    background-size: cover;
+    border-radius: 15px;
+    border: 3px #814111 dashed;
+    margin: 5px;
+}
+
+#idh3{
+    font-family: 'Indie Flower', cursive;
+    color: bisque;
+}
+
+
+#lista{
+    padding: 100px 0 100px 0;
+    text-align: center;
+    background-color: bisque;
+}
+
+#nombre{
+    text-align: center;
+    margin-top: 90px;
+    margin-bottom: -70px;
+}
+
+#logo{
+    text-align: center;
+}
+
+#audioDiv, #audioFondo{
+    display: none;
+}
+
+.bordes{
+    border: 2px black;
+}
+
