@@ -1,0 +1,14 @@
+.imgPortada{width: 370px}
+
+.row{width: 1800px; height: 1800px;}
+#lista{width: 1200px; height: 300px;}
+.piezas{background-color: chartreuse;width: 605px; height: 600px;}
+.fondoRmp{background-color: aquamarine; width: 605px; height: 600px;}
+.imgPieza{width: 200px; height: 200px;}
+
+#audioDiv,#audioFondo{display: none;}
+.tituloInicio{color:red; 
+   text-align: center;
+   font-size:50px;
+   font-family:fantasy;
+   }
