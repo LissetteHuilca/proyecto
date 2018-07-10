@@ -9,15 +9,13 @@
 .piezas{
     background-image: url(../img/madera.jpg);
     padding: 20px;
-    width: 605px;
-    height: 600px;
+    width: 400px;
+    height: 450px;
 }
 
 .fondoRmp{
-    background-color: #a2c453;
-    padding: 20px;
     margin-right: 20px;
-    width: 250px;
+    width: 750px;
     
 }
 
@@ -27,10 +25,16 @@
 }
 
 .fondoPz{
-    padding: 15px;
-    width: 150px;
-    height: 150px;
-    border: 1px solid;
+    width: 450px;
+    height: 200px;
+    border-left: 1px solid;
+    border-bottom: 1px solid;
+    margin-right:-22px;
+    margin-left: -22px;
+}
+
+#imagenFondo{
+    background-color: aquamarine;
 }
 
 #nombreRmp{
@@ -38,7 +42,7 @@
     margin: 0px auto;
 }
 
-body{
+.fondo{
     background-image: url(../img/granja.jpg);
     background-position: center center;
     background-repeat: no-repeat;
