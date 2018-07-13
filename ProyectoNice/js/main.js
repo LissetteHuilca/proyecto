@@ -42,31 +42,39 @@ function leer(){
     
 }
 
+ 
 function listarRompecabezas(){
-    var usuarios=[];
+   var usuarios=[];
+    
     $.getJSON('info.json', function(data){
-     
-        $.each(data, function(i, user){//user(respuesta)
-           usuarios.push(new Usuario(user));
+       
+        $.each(data, function(i, usr){
+            usuarios.push(new Usuario(usr));   
         });
         
-            $.each(usuarios[0].rompecabezas, function(i, objRmp){//rompecabeza(respuesta)
-
-        $("#lista").append("<div class='col-md-4'>\<button id='btnlista' onclick='enviar("+i+")'>\ <h3 id='idh3'>" + objRmp.titulo+"</h3> \ <img class='imgPortada' src='" +objRmp.portada+"' alt=''>\</button>\ </div)");//append para muestre uno debajo del otro
-    });
+          console.log(usuarios);
         
+        var idUsuario = localStorage.getItem("idUser");
         
-        //DESCARAR JSON 
+     $.each(usuarios[idUsuario].rompecabezas, function(i, objRmp){
+            $("#lista").append("<div class='col-md-4'>\
+                        <button id='btnLista' onclick='enviar("+i+")'>\
+                        <h3 id='idh3'>"+ objRmp.titulo + "</h3>\
+                        <img class='imgPortada img-fluid' src='" + objRmp.portada + "'alt=''>\
+                        </button>\
+                        </div>"); 
+        });
+        
         let dataStr = JSON.stringify(usuarios);
         let dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
 
-        let exportFileDefaultName = 'info.json';
-        $("#exportar").attr('href',dataUri);
-        $("#exportar").attr('download',exportFileDefaultName);
-     
-        });
+        let exportFileDefaultName = 'datos.json';
+        
+        $("#exportar").attr('href', dataUri);
+        $("#exportar").attr('download', exportFileDefaultName);    
+        
+    });  
     
- 
 }
 
 
@@ -78,18 +86,20 @@ function listarRompecabezas(){
 
 var intentos=0;
 var piezaCorrecta=0;
+var usuarios=[];
+
  function recibir() {
-     
+     var usuarios=[];
      //AUDIO DE FONDO
-     $("#audioFondo").html("<audio loop id='audioF' controls><source type='audio/wav' src='..\/rompecabeza\/lagranja.mp3'></audio>");
-    $("#audioF")[0].play();
-     
+     //$("#audioFondo").html("<audio loop id='audioF' controls><source type='audio/wav' src='..\/rompecabeza\/lagranja.mp3'></audio>");
+    //$("#audioF")[0].play();
+     console.log(usuarios);
      
     var recoger = localStorage.getItem("posRmp");//guardar 
     //alert(recoger);
      
      
-      var usuarios=[];
+      
     $.getJSON('info.json', function(data){
      
         $.each(data, function(i, user){//user(respuesta)
@@ -106,6 +116,7 @@ var piezaCorrecta=0;
             
             var lista= objRmp.piezas;
             lista= objRmp.piezas.sort(function() {return Math.random() - 0.5})
+      
             
          $.each(lista, function(i, objPieza){//user(respuesta)
            $(".piezas").append("<div class='col-md-4'>"+objPieza.orden+"<img id='s"+objPieza.orden+"' src='"+objPieza.imagen+"'></div>");
@@ -121,9 +132,13 @@ var piezaCorrecta=0;
              $("#fs"+(i+1)).droppable({
         drop: function (event, ui) {
             intentos++;
+            
+            if(intentos>20){
+                         alert("INTÉNTALO DE NUEVO");
+                         window.location = "listarRompecabezas.html"
+            }
         
              $("#intentos").html(intentos);
-            //alert(intentos);
             if ("f"+ui.draggable.attr("id") == $(this).attr("id")) {
                 
                 piezaCorrecta++;
@@ -131,23 +146,28 @@ var piezaCorrecta=0;
                 if(piezaCorrecta == objRmp.piezas.length){
                    
                    alert("GANASTE!");
-                    
-                    
-                    
+                                       
                     if(intentos<=15){
-                        
                         alert("PUNTOS!!");
-                        
                        
                        usuarios[0].score++;
                         
-                        
                          $("#puntaje").html(usuarios[0].score);
                        }
-                     
                     
                     
+                         $.ajax({
+            url: 'guardarPuntaje.php',
+            method: 'post',
+            data: {
+                "identificador": usuarios
+            },
+            success: function (data) {
+                alert(data);
             }
+        });
+              
+            }     
                    // alert("f");
                 var url = ui.draggable.attr("src");
                 $(this).html("<img objPieza.orden src='" + url + "'>");
@@ -162,8 +182,7 @@ var piezaCorrecta=0;
         }
     });
              
-             
-        });
+  });
             
             
             
@@ -178,6 +197,37 @@ var piezaCorrecta=0;
     
 }
 
+
+function validar(){   
+     var usuarios=[];    
+ 
+    $.getJSON('paginas/info.json', function(data){
+     
+        $.each(data, function(i, user){//user(respuesta)
+           usuarios.push(new Usuario(user));
+        });
+        var user = $("#username").val();
+        var pass = $("#password").val();
+        var flag = 0;
+        $.each(usuarios, function(i, res){
+            if(user == res.usuario && pass == res.pass){
+                localStorage.setItem("idUser", i);
+                flag++;
+                window.location = 'paginas/listarRompecabezas.html'
+            }
+        });
+        
+        if(flag==0){
+            alert("Usuario o contraseña incorrecta!");
+        }
+    });   
+}
+       $('#validar').click(validar);       
+              
+        
+       
+
+            
 
     
     
