@@ -57,7 +57,7 @@ function listarRompecabezas(){
         var idUsuario = localStorage.getItem("idUser");
         
      $.each(usuarios[idUsuario].rompecabezas, function(i, objRmp){
-            $("#lista").append("<div class='col-md-4'>\
+            $("#lista").append("<div class='col-sm-4'>\
                         <button id='btnLista' onclick='enviar("+i+")'>\
                         <h3 id='idh3'>"+ objRmp.titulo + "</h3>\
                         <img class='imgPortada img-fluid' src='" + objRmp.portada + "'alt=''>\
@@ -86,7 +86,6 @@ function listarRompecabezas(){
 
 var intentos=0;
 var piezaCorrecta=0;
-var usuarios=[];
 
  function recibir() {
      var usuarios=[];
@@ -119,13 +118,13 @@ var usuarios=[];
       
             
          $.each(lista, function(i, objPieza){//user(respuesta)
-           $(".piezas").append("<div class='col-md-4'>"+objPieza.orden+"<img id='s"+objPieza.orden+"' src='"+objPieza.imagen+"'></div>");
+           $(".piezas").append("<div class='col-sm-4'><img id='s"+objPieza.orden+"' class='img-fluid' src='"+objPieza.imagen+"'></div>");
              
             $("#s"+objPieza.orden).draggable({ revert: true});//si no es compatible con la posisicon se regresa // llama al mismo id
              
              
              
-             $(".fondoRmp").append("<div id='fs"+(i+1)+"' class='col-md-4 fondoPz'>"+(i+1)+"</div>");
+             $(".fondoRmp").append("<div id='fs"+(i+1)+"' class='col-sm-4 fondoPz'></div>");
              
              
              //que reciban el tablero
@@ -168,33 +167,20 @@ var usuarios=[];
         });
               
             }     
-                   // alert("f");
                 var url = ui.draggable.attr("src");
-                $(this).html("<img objPieza.orden src='" + url + "'>");
+                $(this).html("<img class='img-fluid' objPieza.orden src='" + url + "'>");
                  ui.draggable.remove();
 
                 
                 $("#audioDiv").html("<audio id='audioA' controls><source type='audio/wav' src='"+objRmp.sonido+"'></audio>");
                                     $("#audioA")[0].play();
-            } 
-
-
-        }
-    });
-             
-  });
-            
-            
-            
-            
-            
-        }
-                
-                
-                
+                } 
+            }
+         });     
+       });   
+      }            
     });
  });
-    
 }
 
 
