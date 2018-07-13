@@ -6,35 +6,41 @@
     width: 150px;
 }
 
+
 .piezas{
     background-image: url(../img/madera.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 350px;
     padding: 20px;
-    width: 400px;
-    height: 450px;
+    margin: auto;
+    padding: 20px;
 }
 
 .fondoRmp{
-    margin-right: 20px;
-    width: 750px;
+    background-color: aquamarine;
     
 }
 
-.imgPieza{
-    width: 100px;
-    height: 100px;
+.pieza{
+    background-color: blue;
 }
 
 .fondoPz{
-    width: 450px;
-    height: 200px;
-    border-left: 1px solid;
-    border-bottom: 1px solid;
-    margin-right:-22px;
-    margin-left: -22px;
+    width: 52px;
+    height: 154px;
+    border: 1px solid;
+    padding: 0;
 }
 
+/*
 #imagenFondo{
     background-color: aquamarine;
+}
+*/
+
+#fs{
+    background-color: aqua
 }
 
 #nombreRmp{
