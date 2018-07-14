@@ -46,6 +46,10 @@ function leer(){
 function listarRompecabezas(){
    var usuarios=[];
     
+      $("#audioFondo").html("<audio loop id='audioF' controls><source type='audio/wav' src='..\/rompecabeza\/lagranja.mp3'></audio>");
+    $("#audioF")[0].play();
+    
+    
     $.getJSON('info.json', function(data){
        
         $.each(data, function(i, usr){
@@ -89,9 +93,7 @@ var piezaCorrecta=0;
 
  function recibir() {
      var usuarios=[];
-     //AUDIO DE FONDO
-     //$("#audioFondo").html("<audio loop id='audioF' controls><source type='audio/wav' src='..\/rompecabeza\/lagranja.mp3'></audio>");
-    //$("#audioF")[0].play();
+     
      console.log(usuarios);
      
     var recoger = localStorage.getItem("posRmp");//guardar 
@@ -213,9 +215,7 @@ function validar(){
         
        
 
-            
-
-    
+      
     
 
 
