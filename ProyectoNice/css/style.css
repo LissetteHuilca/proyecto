@@ -17,13 +17,19 @@
     padding: 20px;
 }
 
+#titulo{
+  font-family: 'Dancing', cursive; 
+  text-align: center;    
+}
+
 .fondoRmp{
-    background-color: aquamarine;
+    background-color: limegreen;
     
 }
 
-.pieza{
-    background-color: blue;
+#informacion{
+    margin-top: 20px;
+    text-align: center;
 }
 
 .fondoPz{
@@ -39,16 +45,12 @@
 }
 */
 
-#fs{
-    background-color: aqua
-}
-
 #nombreRmp{
     width: 450px;
     margin: 0px auto;
 }
 
-.fondo{
+body{
     background-image: url(../img/granja.jpg);
     background-position: center center;
     background-repeat: no-repeat;
@@ -60,6 +62,21 @@
 #botonRmp{
     align-content: center;
     margin-bottom: -10px;
+}
+
+#botones{
+    text-align: right;
+    margin-right: 130px;
+}
+
+#regresar{
+    width: 60px;
+    color: aliceblue;
+    font-size: larger;
+}
+
+#recargar{
+    width: 90px;
 }
 
 #divRmp{
