@@ -51,7 +51,7 @@
 }
 
 body{
-    background-image: url(../img/granja.jpg);
+    background-image: url(../img/granja2.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -65,7 +65,7 @@ body{
 }
 
 #botones{
-    text-align: right;
+    text-align: left;
     margin-right: 130px;
 }
 
@@ -124,7 +124,7 @@ body{
     text-align: center;
 }
 
-#audioDiv, #audioFondo{
+#audioDiv, #audioFondo, #audioError{
     display: none;
 }
 
