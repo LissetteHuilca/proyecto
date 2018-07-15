@@ -37,17 +37,13 @@ class Pieza{
     }
 }
 
-function leer(){
-    
-    
-}
-
- 
 function listarRompecabezas(){
    var usuarios=[];
     
-      $("#audioFondo").html("<audio loop id='audioF' controls><source type='audio/wav' src='..\/rompecabeza\/lagranja.mp3'></audio>");
+    $("#audioFondo").append("<audio loop id='audioF' controls><source type='audio/wav' src='..\/audios\/lagranja.mp3'></audio>");
     $("#audioF")[0].play();
+    $("#audioFondo").append("<audio autoplay id='audioP' controls><source  type='audio/mp3' src='..\/audios\/eligeRompecabezas.mp3'></audio>");
+    $("#audioP")[0].play();
     
     
     $.getJSON('info.json', function(data){
@@ -135,25 +131,34 @@ var piezaCorrecta=0;
             intentos++;
             
             if(intentos>20){
-                         alert("INTÉNTALO DE NUEVO");
+                         //alert("INTÉNTALO DE NUEVO");
+                        $("#audioDiv").html("<audio id='audioE' controls><source type='audio/mp3' src='..\/audios\/perdiste.mp3'></audio>");
+                        $("#audioE")[0].play();
                          window.location = "listarRompecabezas.html"
                          
             }
         
              $("#intentos").html(intentos);
             if ("f"+ui.draggable.attr("id") == $(this).attr("id")) {
-                
+                $("#audioDiv").html("<audio id='audioA' controls><source type='audio/wav' src='"+objRmp.sonido+"'></audio>");
+                                    $("#audioA")[0].play();
                 piezaCorrecta++;
                 
                 if(piezaCorrecta == objRmp.piezas.length){
                    
-                   alert("GANASTE!");
+                   //alert("GANASTE!");
+                    
                                        
                     if(intentos<=15){
-                        alert("PUNTOS!!");
+                        //alert("PUNTOS!!");
+                        $("#audioDiv").html("<audio id='audioE' controls><source type='audio/mp3' src='..\/audios\/ganaste.mp3'></audio>");
+                        $("#audioE")[0].play();
                         usuarios[idUsuario].score++;
                         
                          $("#puntaje").html(usuarios[idUsuario].score);
+                       }else{
+                          $("#audioDiv").html("<audio id='audioE' controls><source type='audio/mp3' src='..\/audios\/loHiciste.mp3'></audio>");
+                        $("#audioE")[0].play(); 
                        }
                     
                     
@@ -164,8 +169,8 @@ var piezaCorrecta=0;
                                             "identificador": usuarios
                                         },
                                         success: function (data) {
-                                            alert(data);
-                                            window.location = "listarRompecabezas.html";
+                                            //alert(data);
+                                            //window.location = "listarRompecabezas.html";
                                         },
                                         error: function (data){
                                             alert("err"+data);
@@ -179,11 +184,10 @@ var piezaCorrecta=0;
                  ui.draggable.remove();
 
                 
-                $("#audioDiv").html("<audio id='audioA' controls><source type='audio/wav' src='"+objRmp.sonido+"'></audio>");
-                                    $("#audioA")[0].play();
+                
                 }else{
-                    $("#audioError").html("<audio id='audioE' controls><source type='audio/wav' src='..\/rompecabeza\/incorrecto.mp3'></audio>");
-    $("#audioE")[0].play();
+                    $("#audioDiv").html("<audio id='audioE' controls><source type='audio/wav' src='..\/audios\/incorrecto.mp3'></audio>");
+                    $("#audioE")[0].play();
                 }
             
             
@@ -217,7 +221,8 @@ function validar(){
         });
         
         if(flag==0){
-            alert("Usuario o contraseña incorrecta!");
+            $("#audioError").html("<audio id='audioE' controls><source type='audio/wav' src='..\/audios\/datosincorrectos.mp3'></audio>");
+            $("#audioE")[0].play();
         }
     });   
 }
