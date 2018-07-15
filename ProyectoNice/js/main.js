@@ -134,7 +134,7 @@ var piezaCorrecta=0;
                          //alert("INTÉNTALO DE NUEVO");
                         $("#audioDiv").html("<audio id='audioE' controls><source type='audio/mp3' src='..\/audios\/perdiste.mp3'></audio>");
                         $("#audioE")[0].play();
-                         window.location = "listarRompecabezas.html"
+                         //window.location = "listarRompecabezas.html"
                          
             }
         
