@@ -99,7 +99,7 @@ var piezaCorrecta=0;
     var recoger = localStorage.getItem("posRmp");//guardar 
     //alert(recoger);
      
-     
+     var idUsuario = localStorage.getItem("idUser");
       
     $.getJSON('info.json', function(data){
      
@@ -107,12 +107,12 @@ var piezaCorrecta=0;
            usuarios.push(new Usuario(user));
         });
         //obteniendo los datos de cada rompecabezas
-            $.each(usuarios[0].rompecabezas, function(i, objRmp){//rompecabeza(respuesta)
+            $.each(usuarios[idUsuario].rompecabezas, function(i, objRmp){//rompecabeza(respuesta)
 
         if(i==recoger){
             
             $("#titulo").html(objRmp.titulo);
-             $("#puntaje").html(usuarios[0].score);
+             $("#puntaje").html(usuarios[idUsuario].score);
              $("#intentos").html(intentos);
             
             var lista= objRmp.piezas;
@@ -137,6 +137,7 @@ var piezaCorrecta=0;
             if(intentos>20){
                          alert("INTÉNTALO DE NUEVO");
                          window.location = "listarRompecabezas.html"
+                         
             }
         
              $("#intentos").html(intentos);
@@ -150,23 +151,27 @@ var piezaCorrecta=0;
                                        
                     if(intentos<=15){
                         alert("PUNTOS!!");
-                       
-                       usuarios[0].score++;
+                        usuarios[idUsuario].score++;
                         
-                         $("#puntaje").html(usuarios[0].score);
+                         $("#puntaje").html(usuarios[idUsuario].score);
                        }
                     
                     
-                         $.ajax({
-            url: 'guardarPuntaje.php',
-            method: 'post',
-            data: {
-                "identificador": usuarios
-            },
-            success: function (data) {
-                alert(data);
-            }
-        });
+                       $.ajax({
+                                        url: 'guardarPuntaje.php',
+                                        method: 'POST',
+                                        data: {
+                                            "identificador": usuarios
+                                        },
+                                        success: function (data) {
+                                            alert(data);
+                                            window.location = "listarRompecabezas.html";
+                                        },
+                                        error: function (data){
+                                            alert("err"+data);
+                                            console.log(data);
+                                        }
+                                    });
               
             }     
                 var url = ui.draggable.attr("src");
@@ -176,7 +181,13 @@ var piezaCorrecta=0;
                 
                 $("#audioDiv").html("<audio id='audioA' controls><source type='audio/wav' src='"+objRmp.sonido+"'></audio>");
                                     $("#audioA")[0].play();
-                } 
+                }else{
+                    $("#audioError").html("<audio id='audioE' controls><source type='audio/wav' src='..\/rompecabeza\/incorrecto.mp3'></audio>");
+    $("#audioE")[0].play();
+                }
+            
+            
+            
             }
          });     
        });   
