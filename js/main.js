@@ -250,10 +250,10 @@ function touchHandler(event) {
 }
 
 function init() {
-    ($'#tablero').addEventListener("touchstart", touchHandler, true);
-    ($'#tablero').addEventListener("touchmove", touchHandler, true);
-    ($'#tablero').addEventListener("touchend", touchHandler, true);
-    ($'#tablero').addEventListener("touchcancel", touchHandler, true);
+    document.getElementById('tablero').addEventListener("touchstart", touchHandler, true);
+    document.getElementById('tablero').addEventListener("touchmove", touchHandler, true);
+    document.getElementById('tablero').addEventListener("touchend", touchHandler, true);
+    document.getElementById('tablero').addEventListener("touchcancel", touchHandler, true);
 }
       
     
