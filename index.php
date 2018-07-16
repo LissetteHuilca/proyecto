@@ -30,7 +30,7 @@
     <br>
   <div>
       
-     <img id="validar" src="img/play.png">
+     <button id="validar"> Jugar </button>
       
       </div>
     </div>
