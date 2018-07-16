@@ -23,7 +23,7 @@
     </div>
     <br>
     <div>Clave: 
-        <input id="password" type="password" placeholder="Password">
+        <input id="password" type="password" placeholder="Clave">
     </div>
     
     
