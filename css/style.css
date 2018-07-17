@@ -97,10 +97,30 @@
     font-family: 'Dancing', cursive;
     font-size: larger;
 }
+#validar{
+   text-decoration: none;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 25px;
+    color: #ffffff;
+    background-color: #FF0000;
+    border-radius: 6px;
+    border: 2px solid #fff;
+
+}
+
+
+
+#validar:hover {
+color: #3ADF00;
+    background-color: #ffffff;
+}
 
 #imgBoton{
     width: 100px;
 }
+
+
 
 #btnLista{
     background-image: url(../img/madera.jpg);
