@@ -136,7 +136,7 @@ var piezaCorrecta=0;
                          //alert("INTÉNTALO DE NUEVO");
                         $("#audioDiv").html("<audio id='audioE' controls><source type='audio/mp3' src='..\/audios\/perdiste.mp3'></audio>");
                         $("#audioE")[0].play();
-                         //window.location = "listarRompecabezas.html"
+                         
                          
             }
         
@@ -156,7 +156,6 @@ var piezaCorrecta=0;
                         $("#audioDiv").html("<audio id='audioE' controls><source type='audio/mp3' src='..\/audios\/ganaste.mp3'></audio>");
                         $("#audioE")[0].play();
                         usuarios[idUsuario].score++;
-                        
                          $("#puntaje").html(usuarios[idUsuario].score);
                        }else{
                           $("#audioDiv").html("<audio id='audioE' controls><source type='audio/mp3' src='..\/audios\/loHiciste.mp3'></audio>");
@@ -171,16 +170,21 @@ var piezaCorrecta=0;
                                             "identificador": usuarios
                                         },
                                         success: function (data) {
-                                            //alert(data);
-                                            //window.location = "listarRompecabezas.html";
+                                            setTimeout("location.href='listarRompecabezas.html'", 6000);
                                         },
                                         error: function (data){
                                             alert("err"+data);
                                             console.log(data);
+                                            
                                         }
                                     });
+                    
+                    
               
-            }     
+            }
+                
+                
+                
                 var url = ui.draggable.attr("src");
                 $(this).html("<img class='img-fluid' objPieza.orden src='" + url + "'>");
                  ui.draggable.remove();
