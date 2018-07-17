@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" href="/img/icono.png">
 </head>
-<body>
+<body id="bodyFondo">
     <div class="container"> 
         
         
