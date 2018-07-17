@@ -50,9 +50,17 @@
     margin: 0px auto;
 }
 
-body{
+#bodyFondo{
     background-image: url(../img/granja2.jpg);
     background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: beige ;
+}
+
+#fondoRompecabezas{
+        background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
